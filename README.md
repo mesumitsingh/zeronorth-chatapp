@@ -1,11 +1,11 @@
-# 🚀 ZeroNorth Real-Time Chat & AI Collaboration Platform
+# Real-Time Chat
 
-> **Task 1 Submission for ZeroNorth Internship**  
-> A full-stack, enterprise-grade real-time messaging application featuring 1-on-1 private messaging, multi-user group conversations, live presence detection, and Google Gemini AI integration.
+> **Task for ZeroNorth**  
+> A full-stack, enterprise grade real time messaging application with 1 on 1 chat, groups, AI assistant and summarization.
 
 ---
 
-## 📌 Table of Contents
+## Table of Contents
 1. [Project Overview](#-project-overview)
 2. [Key Features](#-key-features)
 3. [Architecture & System Design](#-architecture--system-design)
@@ -20,34 +20,33 @@
 
 ---
 
-## 📖 Project Overview
+## Project Overview
 
-This project is built to demonstrate modern real-time web application architecture. It solves the challenge of instant bidirectional communication, authenticated real-time presence tracking, and contextual AI assistance inside a clean, single-page interface.
+This project is built to demo the real-time web application architecture. It solves the challenge of instant communication, authenticated real time, and AI assistance inside a clean single page interface.
 
 ### Tech Stack
 - **Backend**: Java 17, Spring Boot 3.3.5 (Web, Data MongoDB, WebSocket / STOMP, Security, Validation)
 - **Database**: MongoDB (NoSQL Document Store)
-- **Security**: Spring Security 6, Stateless JWT (`io.jsonwebtoken` 0.12.6), BCrypt Password Hashing
-- **Real-Time Messaging**: Spring WebSocket, STOMP Messaging Protocol, SockJS fallback
+- **Security**: Spring Security 6, JWT, BCrypt Password Hashing
+- **Real-Time Messaging**: Spring WebSocket, STOMP Messaging Protocol, SockJS
 - **AI Engine**: Google Gemini API (`gemini-2.5-flash`)
-- **Frontend**: Vanilla JavaScript (ES6+), Modern CSS3 Glassmorphism UI, HTML5, `@stomp/stompjs` v7, `sockjs-client`
+- **Frontend**: JavaScript, Modern CSS3, HTML5, `@stomp/stompjs`
 
 ---
 
-## ✨ Key Features
+## Features
 
-- 🔐 **Secure Authentication**: User registration and login powered by BCrypt password encryption and signed JWT access tokens.
-- 💬 **1-on-1 Direct Messaging**: Private conversations with automatic peer-name resolution and duplicate room prevention.
-- 👥 **Group Chats**: Dynamic multi-user group creation with member validation.
-- 🟢 **Live Online/Offline Presence**: Real-time presence detection broadcasted automatically via WebSocket connection lifecycle hooks.
-- 🤖 **Contextual AI Chat & Summarization**:
-  - General conversational AI assistant in the sidebar.
-  - One-click conversation summarizer that parses chat history, resolves participant names, and generates concise bullet points using Gemini.
-- ⚡ **Optimized UI/UX**: Responsive SPA with real-time DOM updates, automatic scroll-to-bottom, and intuitive status badges.
+- **Secure Authentication**: User registration and login powered by BCrypt password encryption and signed JWT access tokens.
+- **1-on-1 Direct Messaging**: Private messaging.
+- **Group Chats**: Multiple user group chat.
+- **Live Online/Offline**: Real time online status via WebSocket connection lifecycle hooks.
+- **AI Chat & Summarization**:
+  - AI assistant in the sidebar.
+  - One click summarizer that parses chat history and generates points using Gemini.
 
 ---
 
-## 🏗️ Architecture & System Design
+## Architecture & System Design
 
 ```
 +-----------------------------------------------------------------------------------+
@@ -95,7 +94,7 @@ This project is built to demonstrate modern real-time web application architectu
 
 ---
 
-## ⚡ Deep Dive: WebSockets & STOMP Protocol
+## WebSockets & STOMP Protocol
 
 ### 1. Why STOMP over Raw WebSockets?
 - **Raw WebSockets** provide an unopinionated TCP-like duplex connection over a single TCP socket. However, they lack higher-level message patterns (publish/subscribe, headers, destination routing).
@@ -108,7 +107,7 @@ This project is built to demonstrate modern real-time web application architectu
 public void registerStompEndpoints(StompEndpointRegistry registry) {
     registry.addEndpoint("/ws")
             .setAllowedOriginPatterns("*")
-            .withSockJS(); // Fallback mechanism for restricted networks/proxies
+            .withSockJS(); // Fallback mechanism for restricted networks
 }
 
 @Override
@@ -152,7 +151,7 @@ Client                             Server (WebSocketConfig ChannelInterceptor)
 
 ---
 
-## 🤖 AI Integration (Google Gemini)
+## AI Integration (Google Gemini)
 
 The backend integrates directly with the **Google Generative Language API** using Spring's modern, non-blocking `RestClient`:
 
@@ -165,7 +164,7 @@ The backend integrates directly with the **Google Generative Language API** usin
 
 ---
 
-## 🗄️ Data Models & Schema
+## Data Models & Schema
 
 ### `User` Collection (`users`)
 | Field | Type | Description |
@@ -198,7 +197,7 @@ The backend integrates directly with the **Google Generative Language API** usin
 
 ---
 
-## 🔒 Security & Authentication Flow
+## Security & Authentication Flow
 
 1. **Stateless JWT**: REST endpoints use `OncePerRequestFilter` to inspect `Authorization: Bearer <token>`.
 2. **WebSocket Interception**: WebSocket handshakes and STOMP frames carry the JWT in native headers, authenticating connections before any messages are processed.
@@ -207,7 +206,7 @@ The backend integrates directly with the **Google Generative Language API** usin
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 ### Authentication
 - `POST /api/auth/register` — Register a new account (`{ name, email, password }`)
@@ -230,7 +229,7 @@ The backend integrates directly with the **Google Generative Language API** usin
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
@@ -267,22 +266,22 @@ The backend integrates directly with the **Google Generative Language API** usin
 
 ---
 
-## ⚙️ Setup & Running Locally
+## Setup & Running Locally
 
-### Prerequisites
+### Requirements
 - Java 17+
 - Maven 3.8+
 - MongoDB instance (local or MongoDB Atlas)
 - Google Gemini API Key
 
-### 1. Backend Configuration
+### 1. Backend 
 Create an `.env` file or export environment variables in `backend/chatapp/chatapp/`:
 ```env
 PORT=8080
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/zeronorth-chat?retryWrites=true&w=majority
-MONGODB_DATABASE=zeronorth-chat
-JWT_SECRET=your-256-bit-secret-key-must-be-long-enough-for-hmac-sha256
-GEMINI_API_KEY=your-gemini-api-key
+MONGODB_URI=
+MONGODB_DATABASE=
+JWT_SECRET=
+GEMINI_API_KEY=
 ```
 
 Run the backend:
@@ -292,25 +291,6 @@ cd backend/chatapp/chatapp
 ```
 
 ### 2. Frontend
-Open `frontend/index.html` via Live Server or any static HTTP server (e.g. `http://localhost:5500` or `http://localhost:3000`).
+Open `frontend/index.html` via Live Server.
 
 ---
-
-## 🎯 Interview Talking Points & Presentation Guide
-
-When explaining this project to interviewers, highlight these key engineering decisions:
-
-### 1. Why STOMP over Raw WebSockets?
-> *"Raw WebSockets provide a low-level duplex byte stream without built-in message routing or framing. I chose STOMP over SockJS because it introduces lightweight pub/sub semantics. It allows us to route messages cleanly to `/topic/conversations/{id}` and handle RPC-like inbound actions at `/app/chat`, with automatic fallback for network proxies."*
-
-### 2. How is Authentication Handled over WebSockets?
-> *"Since WebSockets establish a long-lived TCP connection, traditional per-request HTTP filters only run during the initial handshake. I implemented a Spring `ChannelInterceptor` that inspects the STOMP `CONNECT` frame header for the `Bearer <JWT>` token, validates the signature via `JwtService`, associates the Spring Security `Principal` with the session, and triggers online presence updates in a thread-safe manner."*
-
-### 3. How Presence (Online/Offline) Works Reliably:
-> *"When a user connects, the interceptor marks them online and publishes a presence event to `/topic/presence`. When the STOMP session terminates (either via graceful disconnect or network drop), the interceptor hooks into the `DISCONNECT` event, marks `online = false` with a `lastSeen` timestamp in MongoDB, and broadcasts the status update to all connected clients."*
-
-### 4. AI Prompt Engineering & Context Management:
-> *"For conversation summarization, rather than sending unformatted JSON IDs to Gemini, the backend fetches the 50 most recent messages, replaces raw database ObjectIds with user display names, and feeds a clean conversation transcript to Gemini 2.5 Flash, generating a structured, readable summary."*
-
-### 5. Potential Scaling Improvements (Next Steps):
-> *"If scaling horizontally across multiple backend instances, the current in-memory `SimpleBroker` would be replaced with an external message broker like RabbitMQ or Redis Pub/Sub so messages can be relayed across server nodes."*
