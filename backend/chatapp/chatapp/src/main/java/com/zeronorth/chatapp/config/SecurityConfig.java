@@ -123,7 +123,7 @@ public class SecurityConfig {
                 "http://127.0.0.1:5500",
                 "http://localhost:3000",
                 "http://127.0.0.1:3000",
-                "https://YOUR-FRONTEND-URL.onrender.com"
+                "https://zeronorth-chatapp-1.onrender.com"
         ));
 
         configuration.setAllowedMethods(List.of(
