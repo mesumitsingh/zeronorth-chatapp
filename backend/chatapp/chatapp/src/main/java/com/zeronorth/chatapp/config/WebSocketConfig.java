@@ -98,9 +98,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
                                 String sessionId = accessor.getSessionId();
 
-                                // =========================
                                 // USER CONNECTS
-                                // =========================
 
                                 if (StompCommand.CONNECT.equals(command)) {
 
@@ -175,9 +173,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                                         }
                                 }
 
-                                // =========================
                                 // RESTORE AUTHENTICATION
-                                // =========================
 
                                 else if (sessionId != null
                                                 && sessions.containsKey(sessionId)) {
@@ -191,9 +187,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                                                                         + authentication.getName());
                                 }
 
-                                // =========================
                                 // USER DISCONNECTS
-                                // =========================
 
                                 if (StompCommand.DISCONNECT.equals(command)) {
 

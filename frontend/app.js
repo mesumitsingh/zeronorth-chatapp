@@ -10,9 +10,9 @@ let users = [];
 let conversations = [];
 
 
-// ==============================
+
 // Page initialization
-// ==============================
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ==============================
+
 // Authentication
-// ==============================
+
 
 function showLogin() {
 
@@ -190,9 +190,9 @@ function logout() {
 }
 
 
-// ==============================
+
 // Chat page
-// ==============================
+
 
 async function showChatPage() {
 
@@ -231,9 +231,9 @@ async function showChatPage() {
 }
 
 
-// ==============================
+
 // REST helper
-// ==============================
+
 
 async function apiFetch(url, options = {}) {
 
@@ -266,9 +266,9 @@ async function apiFetch(url, options = {}) {
 }
 
 
-// ==============================
+
 // Users
-// ==============================
+
 
 async function loadUsers() {
 
@@ -310,11 +310,10 @@ function renderUsers() {
 
         div.innerHTML = `
             <strong>${escapeHtml(user.name)}</strong>
-            <span class="user-status ${
-            user.online
+            <span class="user-status ${user.online
                 ? "online"
                 : "offline"
-        }">
+            }">
                 ${status}
             </span>
         `;
@@ -327,9 +326,9 @@ function renderUsers() {
 }
 
 
-// ==============================
+
 // Conversations
-// ==============================
+
 
 async function loadConversations() {
 
@@ -405,9 +404,8 @@ async function createPrivateConversation(userId) {
 }
 
 
-// ==============================
 // Group
-// ==============================
+
 
 function showGroupDialog() {
 
@@ -505,9 +503,8 @@ async function createGroup() {
 }
 
 
-// ==============================
 // Open conversation
-// ==============================
+
 
 async function openConversation(conversation) {
 
@@ -565,9 +562,9 @@ async function loadMessages() {
 }
 
 
-// ==============================
+
 // WebSocket
-// ==============================
+
 
 function connectWebSocket() {
 
@@ -669,9 +666,9 @@ function subscribeToConversation() {
 }
 
 
-// ==============================
+
 // Messages
-// ==============================
+
 
 function sendMessage() {
 
@@ -706,7 +703,7 @@ function sendMessage() {
 
         body: JSON.stringify({
             conversationId:
-            currentConversation.id,
+                currentConversation.id,
             content: content
         })
     });
@@ -754,8 +751,7 @@ function renderMessage(message) {
     div.innerHTML = `
         <div class="message-content">
 
-            ${
-        !mine
+            ${!mine
             ? `<div class="message-sender">
                         ${escapeHtml(
                 getUserName(
@@ -764,12 +760,12 @@ function renderMessage(message) {
             )}
                        </div>`
             : ""
-    }
+        }
 
             <div>
                 ${escapeHtml(
-        message.content
-    )}
+            message.content
+        )}
             </div>
 
             <div class="message-time">
@@ -815,9 +811,9 @@ function scrollMessagesToBottom() {
 }
 
 
-// ==============================
+
 // Presence
-// ==============================
+
 
 function updateUserPresence(presence) {
 
@@ -838,9 +834,8 @@ function updateUserPresence(presence) {
 }
 
 
-// ==============================
 // AI
-// ==============================
+
 
 async function askAI() {
 
@@ -928,9 +923,8 @@ async function summarizeConversation() {
 }
 
 
-// ==============================
+
 // Utility
-// ==============================
 
 function escapeHtml(value) {
 
