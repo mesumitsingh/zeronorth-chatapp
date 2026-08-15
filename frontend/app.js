@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080";
+const API_URL = "https://zeronorth-chatapp.onrender.com";
 
 let token = localStorage.getItem("token");
 let currentUser = null;
