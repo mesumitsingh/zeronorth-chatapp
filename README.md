@@ -33,49 +33,7 @@ This project is built to demo the real-time web application architecture. It sol
 
 ## Architecture & System Design
 
-```
-+-----------------------------------------------------------------------------------+
-|                                  CLIENT (BROWSER)                                 |
-|   Vanilla JS (app.js)  |  SockJS + STOMP Client  |  Modern UI (index.html / CSS)  |
-+------------------------------------------+----------------------------------------+
-                                           |
-                   +-----------------------+-----------------------+
-                   | HTTP REST (JSON)                              | WebSocket / STOMP
-                   v                                               v
-+------------------------------------------+----------------------------------------+
-|                                SPRING BOOT BACKEND                                |
-|                                                                                   |
-|  [AuthController]      [ChatController]      [AIController]     [WebSocketConfig] |
-|   - /api/auth/*         - /api/users          - /api/ai/chat     - STOMP Interc.  |
-|                         - /api/conversations  - /api/ai/summari. - /ws (SockJS)   |
-|                         - @MessageMapping("/chat")                                |
-|                                                                                   |
-|  +-----------------------------------------------------------------------------+  |
-|  |                            SECURITY & MIDDLEWARE                            |  |
-|  |   - OncePerRequestFilter (REST JWT Auth)                                    |  |
-|  |   - ChannelInterceptor (STOMP CONNECT / DISCONNECT Auth & Presence)         |  |
-|  +-----------------------------------------------------------------------------+  |
-|                                                                                   |
-|  +-----------------------------------------------------------------------------+  |
-|  |                               SERVICE LAYER                                 |  |
-|  |   - AuthService (BCrypt, Token Generation)                                  |  |
-|  |   - ChatService (Conversations, Messages, Membership Checks)                |  |
-|  |   - AIService (Prompt Engineering, RestClient to Gemini API)                |  |
-|  |   - JwtService (HMAC-SHA256 Token Parser & Validator)                       |  |
-|  +-----------------------------------------------------------------------------+  |
-|                                                                                   |
-|  +-----------------------------------------------------------------------------+  |
-|  |                            DATA ACCESS (REPOSITORIES)                       |  |
-|  |   - UserRepository       - ConversationRepository     - MessageRepository   |  |
-|  +-----------------------------------------------------------------------------+  |
-+----------------------+------------------------------------+-----------------------+
-                       |                                    |
-                       v                                    v
-            +---------------------+              +--------------------+
-            |   MongoDB Database  |              | Google Gemini API  |
-            |  (Users/Chats/Msgs) |              | (gemini-2.5-flash) |
-            +---------------------+              +--------------------+
-```
+![Architecture & System Design](./ChatAppArchitecture.png)
 
 
 ## Setup
