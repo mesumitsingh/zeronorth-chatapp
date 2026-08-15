@@ -1,6 +1,5 @@
 # Real-Time Chat
 
-> **Task for ZeroNorth**  
 > A full-stack, enterprise grade real time messaging application with 1 on 1 chat, groups, AI assistant and summarization.
 
 ---
