@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ZeroNorth Chat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.1.1/bundles/stomp.umd.min.js"></script>
+</head>
+
+<body>
+
+<div id="loginPage" class="auth-page">
+
+  <div class="auth-box">
+
+    <h1>ZeroNorth Chat</h1>
+
+    <h2>Login</h2>
+
+    <input
+            type="email"
+            id="loginEmail"
+            placeholder="Email"
+    >
+
+    <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+    >
+
+    <button onclick="login()">
+      Login
+    </button>
+
+    <p>
+      Don't have an account?
+      <a href="#" onclick="showRegister()">
+        Register
+      </a>
+    </p>
+
+    <p id="loginError" class="error"></p>
+
+  </div>
+
+</div>
+
+
+<div id="registerPage" class="auth-page hidden">
+
+  <div class="auth-box">
+
+    <h1>ZeroNorth Chat</h1>
+
+    <h2>Create Account</h2>
+
+    <input
+            type="text"
+            id="registerName"
+            placeholder="Name"
+    >
+
+    <input
+            type="email"
+            id="registerEmail"
+            placeholder="Email"
+    >
+
+    <input
+            type="password"
+            id="registerPassword"
+            placeholder="Password"
+    >
+
+    <button onclick="register()">
+      Register
+    </button>
+
+    <p>
+      Already have an account?
+      <a href="#" onclick="showLogin()">
+        Login
+      </a>
+    </p>
+
+    <p id="registerError" class="error"></p>
+
+  </div>
+
+</div>
+
+
+<div id="chatPage" class="chat-page hidden">
+
+  <header class="topbar">
+
+    <div>
+      <strong>ZeroNorth Chat</strong>
+    </div>
+
+    <div class="current-user">
+
+      <span id="currentUserName"></span>
+
+      <button onclick="logout()">
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="chat-layout">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+
+        <div class="sidebar-title">
+          <span>Conversations</span>
+
+          <button onclick="showGroupDialog()">
+            + Group
+          </button>
+        </div>
+
+        <div id="conversationList"></div>
+
+      </div>
+
+
+      <div class="sidebar-section">
+
+        <div class="sidebar-title">
+          Users
+        </div>
+
+        <div id="userList"></div>
+
+      </div>
+
+    </aside>
+
+
+    <section class="chat-area">
+
+      <div class="chat-header">
+
+        <div>
+
+          <h3 id="chatTitle">
+            Select a conversation
+          </h3>
+
+          <span id="chatStatus"></span>
+
+        </div>
+
+      </div>
+
+
+      <div
+              id="messageList"
+              class="message-list"
+      >
+      </div>
+
+
+      <div class="message-input">
+
+        <input
+                type="text"
+                id="messageInput"
+                placeholder="Type a message..."
+                onkeydown="handleMessageKey(event)"
+        >
+
+        <button onclick="sendMessage()">
+          Send
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <aside class="ai-panel">
+
+      <h3>AI Assistant</h3>
+
+      <textarea
+              id="aiInput"
+              placeholder="Ask Gemini something..."
+      ></textarea>
+
+      <button onclick="askAI()">
+        Ask
+      </button>
+
+      <button
+              class="secondary-button"
+              onclick="summarizeConversation()"
+      >
+        Summarize Chat
+      </button>
+
+      <div
+              id="aiResponse"
+              class="ai-response"
+      ></div>
+
+    </aside>
+
+  </main>
+
+</div>
+
+
+<div
+        id="groupDialog"
+        class="dialog hidden"
+>
+
+  <div class="dialog-box">
+
+    <h3>Create Group</h3>
+
+    <input
+            type="text"
+            id="groupName"
+            placeholder="Group name"
+    >
+
+    <p>Select members:</p>
+
+    <div id="groupMembers"></div>
+
+    <div class="dialog-buttons">
+
+      <button onclick="createGroup()">
+        Create
+      </button>
+
+      <button
+              class="secondary-button"
+              onclick="closeGroupDialog()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
