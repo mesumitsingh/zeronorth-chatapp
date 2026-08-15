@@ -34,6 +34,12 @@ This project is built to demo the real-time web application architecture. It sol
 
 ![Architecture & System Design](./ChatAppArchitecture.png)
 
+## Screenshots
+
+### Running Project
+
+![Running Project](./ChatAppScreenshot.png)
+
 
 ## Setup
 
@@ -63,3 +69,4 @@ cd backend/chatapp/chatapp
 Open `frontend/index.html` via Live Server.
 
 ---
+
