@@ -5,21 +5,6 @@
 
 ---
 
-## Table of Contents
-1. [Project Overview](#-project-overview)
-2. [Key Features](#-key-features)
-3. [Architecture & System Design](#-architecture--system-design)
-4. [Deep Dive: WebSockets & STOMP Protocol](#-deep-dive-websockets--stomp-protocol)
-5. [AI Integration (Google Gemini)](#-ai-integration-google-gemini)
-6. [Data Models & Schema](#-data-models--schema)
-7. [Security & Authentication Flow](#-security--authentication-flow)
-8. [API Reference](#-api-reference)
-9. [Project Structure](#-project-structure)
-10. [Setup & Running Locally](#-setup--running-locally)
-11. [Interview Talking Points & Presentation Guide](#-interview-talking-points--presentation-guide)
-
----
-
 ## Project Overview
 
 This project is built to demo the real-time web application architecture. It solves the challenge of instant communication, authenticated real time, and AI assistance inside a clean single page interface.
